@@ -16,10 +16,29 @@ const loadsMeals = searchText => {
 }
 loadsMeals('fish')
 
+// meal db 
+    const toggleSpinner = displyaStyle => {
+    document.getElementById('spinner').style.display = displyaStyle;
+}
+    const toggleSearchResult = displyaStyle => {
+    document.getElementById('meals').style.display = displyaStyle;
+}
+
+const searchmeals = () => {
+     const searchText = document.getElementById('search-field').value
+
+    //  displaySpinner
+     toggleSpinner('block')
+     toggleSearchResult('none')
+     loadsMeals(searchText)
+     document.getElementById('search-field').value = '';
+}
+
 const displayMeals = meals => {
-    console.log(meals)
+    
     const container = document.getElementById('meals')
-    meals.forEach ( meals => {
+    container.textContent = '';
+    meals?.forEach ( meals => {
         const div = document.createElement('div')
         div.innerHTML = `
         <h1>${meals.strMeal}</h1>
@@ -27,7 +46,9 @@ const displayMeals = meals => {
 
         `
         container.appendChild(div)
-    })
+    });
+    toggleSpinner('none')
+    toggleSearchResult('block')
 }
 
 const loadMealsDetails = mealName =>{
